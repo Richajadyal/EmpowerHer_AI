@@ -38,6 +38,11 @@ if user in journal_data and journal_data[user]:
     mood_records = []
     for entry_date in sorted(journal_data[user].keys(), reverse=True):
         entry = journal_data[user][entry_date]
+
+        # ✅ Fix: Ensure entry is a dictionary before using .get()
+        if not isinstance(entry, dict):
+            entry = {}
+
         mood = entry.get("mood", "Not Analyzed")
         st.markdown(f"🗓️ **{entry_date}** | 😊 Mood: **{mood}**")
         st.write(f"💭 **Thoughts:** {entry.get('thoughts', '')}")
