@@ -39,22 +39,32 @@ if user in journal_data and journal_data[user]:
     for entry_date in sorted(journal_data[user].keys(), reverse=True):
         entry = journal_data[user][entry_date]
 
-        # ✅ Fix: Ensure entry is a dictionary before using .get()
+        # ✅ Ensure entry is a dictionary
         if not isinstance(entry, dict):
             entry = {}
 
-        mood = entry.get("mood", "Not Analyzed")
+        mood = entry.get("mood") or "Not Analyzed"
+        thoughts = entry.get("thoughts", "")
+        feelings = entry.get("feelings", "")
+        experiences = entry.get("experiences", "")
+        gratitude = entry.get("gratitude", "")
+        lesson = entry.get("lesson", "")
+
+        # 📅 Full Journal Entry Block
         st.markdown(f"🗓️ **{entry_date}** | 😊 Mood: **{mood}**")
-        st.write(f"💭 **Thoughts:** {entry.get('thoughts', '')}")
-        st.write(f"❤️ **Feelings:** {entry.get('feelings', '')}")
-        st.write(f"🌟 **Experiences:** {entry.get('experiences', '')}")
+        st.markdown(f"💭 **Thoughts:** {thoughts}")
+        st.markdown(f"❤️ **Feelings:** {feelings}")
+        st.markdown(f"🌟 **Experiences:** {experiences}")
+        st.markdown(f"🙏 **Gratitude:** {gratitude}")
+        st.markdown(f"📚 **Lesson Learned:** {lesson}")
         st.markdown("---")
 
+        # 📈 Add to mood records for trend plot
         mood_records.append({"Date": entry_date, "Mood": mood})
 
     # ✅ Mood Trend Graph
     df = pd.DataFrame(mood_records)
-    if len(df) > 0:
+    if not df.empty:
         st.subheader("📈 Mood Trend Over Time")
         fig = px.line(df, x="Date", y="Mood", markers=True, title="Your Mood Journey")
         st.plotly_chart(fig, use_container_width=True)
