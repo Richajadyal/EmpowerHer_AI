@@ -99,12 +99,11 @@ MIT License
 
 ## 📫 Contact
 **Richa Jadyal** — *jadyalricha@gmail.com*  
-[LinkedIn](https://www.linkedin.com/in/your-username/)
+[LinkedIn](https://www.linkedin.com/in/your-username/) | [GitHub](https://github.com/Richajadyal)
 
 
 ---
 
 > *Let’s empower women with technology and empathy!*
-
 
 
