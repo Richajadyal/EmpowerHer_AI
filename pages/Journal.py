@@ -38,7 +38,10 @@ st.subheader(f"📅 Journal for {today}")
 
 # ✅ Default structure if no entry exists for today
 if today not in journal[username]:
-    journal[username][today] = {"thoughts": "", "feelings": "", "experiences": "", "gratitude": "", "lesson": ""}
+    journal[username][today] = {
+        "thoughts": "", "feelings": "", "experiences": "",
+        "gratitude": "", "lesson": "", "mood": ""
+    }
 
 # ✅ Real Journal Sections
 st.markdown("### 💭 Thoughts")
@@ -56,6 +59,14 @@ gratitude = st.text_area("What are you grateful for today?", value=journal[usern
 st.markdown("### 📚 Lesson Learned")
 lesson = st.text_area("What lesson did you learn today?", value=journal[username][today]["lesson"], height=80)
 
+# ✅ Mood Selector with full list
+st.markdown("### 🙂 Mood of the Day")
+mood_options = [
+    "Happy", "Sad", "Angry", "Excited", "Stressed", "Confused", "Motivated",
+    "Neutral", "Anxious", "Relaxed", "Tired", "Fearful", "Disgusted", "In Love", "Confident"
+]
+mood = st.selectbox("How are you feeling overall today?", mood_options, index=7)  # Default to "Neutral"
+
 # ✅ Save Button
 if st.button("💾 Save Today's Journal"):
     journal[username][today] = {
@@ -63,7 +74,8 @@ if st.button("💾 Save Today's Journal"):
         "feelings": feelings,
         "experiences": experiences,
         "gratitude": gratitude,
-        "lesson": lesson
+        "lesson": lesson,
+        "mood": mood
     }
     save_journal(journal)
     st.success("✅ Journal entry saved successfully!")
@@ -81,7 +93,8 @@ else:
             st.markdown(f"**🌟 Experiences:** {entry.get('experiences', '')}")
             st.markdown(f"**🙏 Gratitude:** {entry.get('gratitude', '')}")
             st.markdown(f"**📚 Lesson Learned:** {entry.get('lesson', '')}")
-            
+            st.markdown(f"**🙂 Mood:** {entry.get('mood', 'Not Recorded')}")
+
             if st.button(f"🗑️ Delete {entry_date}", key=f"del_{entry_date}"):
                 del journal[username][entry_date]
                 save_journal(journal)
