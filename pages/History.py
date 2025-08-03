@@ -1,7 +1,5 @@
 import streamlit as st
 import json, os
-import pandas as pd
-import plotly.express as px
 
 # 🔐 Restrict access if not logged in
 if "logged_in" not in st.session_state or not st.session_state.logged_in:
@@ -35,7 +33,6 @@ user = st.session_state.get("username", "Guest")
 # ✅ Show Journal History with Mood
 st.subheader("📖 Your Journal Entries")
 if user in journal_data and journal_data[user]:
-    mood_records = []
     for entry_date in sorted(journal_data[user].keys(), reverse=True):
         entry = journal_data[user][entry_date]
 
@@ -58,16 +55,6 @@ if user in journal_data and journal_data[user]:
         st.markdown(f"🙏 **Gratitude:** {gratitude}")
         st.markdown(f"📚 **Lesson Learned:** {lesson}")
         st.markdown("---")
-
-        # 📈 Add to mood records for trend plot
-        mood_records.append({"Date": entry_date, "Mood": mood})
-
-    # ✅ Mood Trend Graph
-    df = pd.DataFrame(mood_records)
-    if not df.empty:
-        st.subheader("📈 Mood Trend Over Time")
-        fig = px.line(df, x="Date", y="Mood", markers=True, title="Your Mood Journey")
-        st.plotly_chart(fig, use_container_width=True)
 else:
     st.info("✍️ You haven't written anything in your journal yet.")
 
