@@ -99,7 +99,7 @@ MIT License
 
 ## 📫 Contact
 **Richa Jadyal** — *jadyalricha@gmail.com*  
-[LinkedIn](https://www.linkedin.com/in/your-username/) | [GitHub](https://github.com/Richajadyal)
+[LinkedIn](https://www.linkedin.com/in/richa-jadyal-68b138259/) | [GitHub](https://github.com/Richajadyal)
 
 
 ---
