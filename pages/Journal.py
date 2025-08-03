@@ -37,7 +37,7 @@ today = str(date.today())
 st.subheader(f"📅 Journal for {today}")
 
 # ✅ Default structure if no entry exists for today
-if today not in journal[username]:
+if today not in journal[username] or not isinstance(journal[username][today], dict):
     journal[username][today] = {
         "thoughts": "", "feelings": "", "experiences": "",
         "gratitude": "", "lesson": "", "mood": ""
@@ -86,14 +86,19 @@ if len(journal[username]) == 0:
     st.info("No journal entries yet. Start writing today!")
 else:
     for entry_date in sorted(journal[username].keys(), reverse=True):
+        entry = journal[username][entry_date]
+
+        # ✅ Skip entries that are not proper dictionaries
+        if not isinstance(entry, dict):
+            continue
+
         with st.expander(f"📅 {entry_date}"):
-            entry = journal[username][entry_date]
             st.markdown(f"**💭 Thoughts:** {entry.get('thoughts', '')}")
             st.markdown(f"**❤️ Feelings:** {entry.get('feelings', '')}")
             st.markdown(f"**🌟 Experiences:** {entry.get('experiences', '')}")
             st.markdown(f"**🙏 Gratitude:** {entry.get('gratitude', '')}")
             st.markdown(f"**📚 Lesson Learned:** {entry.get('lesson', '')}")
-            st.markdown(f"**🙂 Mood:** {entry.get('mood', 'Not Recorded')}")
+            st.markdown(f"**🙂 Mood:** {entry.get('mood') or 'Not Recorded'}")
 
             if st.button(f"🗑️ Delete {entry_date}", key=f"del_{entry_date}"):
                 del journal[username][entry_date]
