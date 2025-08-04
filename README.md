@@ -101,6 +101,11 @@ MIT License
 **Richa Jadyal** — *jadyalricha@gmail.com*  
 [LinkedIn](https://www.linkedin.com/in/richa-jadyal-68b138259/) | [GitHub](https://github.com/Richajadyal)
 
+---
+
+## 🌐 Live Demo
+
+[👉 Click here to try the Smart Data Visualizer](https://empowerherai.streamlit.app/)
 
 ---
 
