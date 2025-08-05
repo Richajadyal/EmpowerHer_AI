@@ -8,7 +8,7 @@ if "logged_in" not in st.session_state or not st.session_state.logged_in:
     st.switch_page("app.py")
 
 # ✅ Configure Gemini API
-genai.configure(api_key="AIzaSyAZXWiScR6_RRJAthictxbzentD-_QY6zM")
+genai.configure(api_key="Add your API")
 
 # 🎨 Dark Theme CSS
 st.markdown("""
@@ -85,3 +85,4 @@ else:
     for chat in reversed(st.session_state.mentor_history):
         st.markdown(f"<div class='chat-box user'><b>👩 You ({chat['time']}):</b><br>{chat['user']}</div>", unsafe_allow_html=True)
         st.markdown(f"<div class='chat-box bot'><b>🤖 Mentor:</b><br>{chat['bot']}</div>", unsafe_allow_html=True)
+
