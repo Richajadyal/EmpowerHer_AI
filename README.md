@@ -109,6 +109,13 @@ MIT License
 
 ---
 
+🔐 Note:
+The API key used for some features (i.e., Find Mentor) has been removed for security reasons.  
+To enable full functionality, create a `.env` file and add your own `GOOGLE_API_KEY`.
+
+---
+
+
 > *Let’s empower women with technology and empathy!*
 
 
